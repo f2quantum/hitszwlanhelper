@@ -1,0 +1,2 @@
+rootProject.name='HITszWlanHelper'
+include ':app'
