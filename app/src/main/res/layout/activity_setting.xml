@@ -79,8 +79,8 @@
         android:layout_marginTop="40dp"
         android:text="定位权限用于程序自动判断当前网络（UTSZ/HITSZ）\n并前往对应的登录界面"
         app:layout_constraintTop_toBottomOf="@+id/button_save"
-        tools:layout_editor_absoluteX="59dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="59dp" />
 
     <TextView
         android:id="@+id/textView"

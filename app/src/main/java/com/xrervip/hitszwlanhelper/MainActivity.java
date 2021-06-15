@@ -1,7 +1,5 @@
 package com.xrervip.hitszwlanhelper;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -18,6 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,21 +35,21 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.toolmenu);
-        toolbarTitle=findViewById(R.id.toolbar_title_main);
+        toolbarTitle = findViewById(R.id.toolbar_title_main);
         //添加菜单点击事件
 
         //final Intent intent_setting=new Intent(this,settingActivity.class);
-        final Intent intent_setting=new Intent(this,NewSettingActivity.class);
+        final Intent intent_setting = new Intent(this, NewSettingActivity.class);
 
-        final Intent intent_about=new Intent(this,aboutActivity.class);
+        final Intent intent_about = new Intent(this, aboutActivity.class);
         final Intent intent_hotpot = new Intent();
 
         System.out.println(ssid_data());
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                String str="";
-                switch (menuItem.getItemId()){
+                String str = "";
+                switch (menuItem.getItemId()) {
                     case R.id.setting:
                         startActivity(intent_setting);
                         break;
@@ -76,29 +75,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String wifiState= checkNetWorkState();
-        Boolean isConnectCampNet = wifiState.equals("已连接HITSZ")|| wifiState.equals("已连接UTSZ")|| wifiState.contains("unknown ssid");
-        if(wifiState.contains("unknown ssid")){
-            url=Sp_read_network().contains("UTSZ")?"http://10.0.10.66/":"http://10.248.98.2/"; //  UTSZ:HITSZ
-            toolbarTitle.setText(Sp_read_network().contains("UTSZ")?"UTSZ":"HITSZ");
+        String wifiState = checkNetWorkState();
+        Boolean isConnectCampNet = wifiState.equals("已连接HITSZ") || wifiState.equals("已连接UTSZ") || wifiState.contains("unknown ssid");
+        if (wifiState.contains("unknown ssid")) {
+            url = Sp_read_network().contains("UTSZ") ? "http://10.0.10.66/" : "http://10.248.98.2/"; //  UTSZ:HITSZ
+            toolbarTitle.setText(Sp_read_network().contains("UTSZ") ? "UTSZ" : "HITSZ");
 
-        }else {
-            url= wifiState.contains("UTSZ")?"http://10.0.10.66/":"http://10.248.98.2/"; //  UTSZ:HITSZ
-            toolbarTitle.setText(wifiState.contains("UTSZ")?"UTSZ":"HITSZ");
+        } else {
+            url = wifiState.contains("UTSZ") ? "http://10.0.10.66/" : "http://10.248.98.2/"; //  UTSZ:HITSZ
+            toolbarTitle.setText(wifiState.contains("UTSZ") ? "UTSZ" : "HITSZ");
         }
-        if(Sp_read_id().equals("Null")){
-            Toast.makeText(MainActivity.this,"首次运行前，请设置账户和密码", Toast.LENGTH_SHORT).show();
+        if (Sp_read_id().equals("Null")) {
+            Toast.makeText(MainActivity.this, "首次运行前，请设置账户和密码", Toast.LENGTH_SHORT).show();
             startActivity(intent_setting);
         }
-        if (!isConnectCampNet){
+        if (!isConnectCampNet) {
             AlertDialog alertDialog = new AlertDialog.Builder(this)
                     .setTitle(wifiState)
-                    .setMessage("当前SSID:"+ssid_data())
+                    .setMessage("当前SSID:" + ssid_data())
                     .setIcon(R.mipmap.ic_launcher)
                     .setPositiveButton("仍要继续", new DialogInterface.OnClickListener() {//添加"Yes"按钮
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(MainActivity.this,"好吧", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "好吧", Toast.LENGTH_SHORT).show();
                         }
                     })
 
@@ -120,23 +119,22 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
 
-
-
     }
 
     /**
      * 检查WiFi状态
+     *
      * @return 返回当前Wifi状态的语句
      */
-    private String  checkNetWorkState(){
+    private String checkNetWorkState() {
         final WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        if(wifiManager == null){
+        if (wifiManager == null) {
             return "WIFI状态异常！";
         }
         int wifiState = wifiManager.getWifiState();
         //检查WIFI状态
-        switch (wifiState){
-            case  1 :
+        switch (wifiState) {
+            case 1:
                 return "WIFI网卡不可用";
             case 2:
                 return "WIFI正在关闭";
@@ -151,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
         String SSID = wifiInfo.getSSID();
         if (SSID.contains("HITSZ"))
             return "已连接HITSZ";
-        else if(SSID.contains("UTSZ"))
+        else if (SSID.contains("UTSZ"))
             return "已连接UTSZ";
-        else if(SSID.contains("<unknown ssid>"))
+        else if (SSID.contains("<unknown ssid>"))
             return "unknown ssid 请给予定位权限";
         else
             return "未连接到校园网";
@@ -161,30 +159,33 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 获取wifi名称ssid 和 bssid mac地址 返回wifiInfo对象
-     * @return  wifiInfo
+     *
+     * @return wifiInfo
      */
-    private String ssid_data(){
+    private String ssid_data() {
         final WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         return wifiInfo.getSSID();
     }
 
-    private String Sp_read_id(){
-        mSp= super.getSharedPreferences("HITszWlanHelper",MODE_PRIVATE);
-         return mSp.getString("str_id","Null");
+    private String Sp_read_id() {
+        mSp = super.getSharedPreferences("HITszWlanHelper", MODE_PRIVATE);
+        return mSp.getString("str_id", "Null");
 
     }
-    private String Sp_read_psd(){
-        mSp= super.getSharedPreferences("HITszWlanHelper",MODE_PRIVATE);
-        return mSp.getString("str_password","");
-    }
-    private String Sp_read_network(){
-        mSp= super.getSharedPreferences("HITszWlanHelper",MODE_PRIVATE);
-        return mSp.getString("NetWork","HITSZ");
+
+    private String Sp_read_psd() {
+        mSp = super.getSharedPreferences("HITszWlanHelper", MODE_PRIVATE);
+        return mSp.getString("str_password", "");
     }
 
-    private void initView(){
-        webView = (WebView)findViewById(R.id.webView);
+    private String Sp_read_network() {
+        mSp = super.getSharedPreferences("HITszWlanHelper", MODE_PRIVATE);
+        return mSp.getString("NetWork", "HITSZ");
+    }
+
+    private void initView() {
+        webView = (WebView) findViewById(R.id.webView);
 
         //支持javascript
         webView.getSettings().setJavaScriptEnabled(true);
@@ -211,9 +212,9 @@ public class MainActivity extends AppCompatActivity {
         });
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
-                Toast.makeText(MainActivity.this,"页面加载已完成，", Toast.LENGTH_SHORT).show();
-                view.loadUrl("javascript:document.getElementById('username').value = "+ Sp_read_id());
-                view.loadUrl("javascript:(function(){document.getElementById('password').value = '"+Sp_read_psd()+"';})() " ) ;
+                Toast.makeText(MainActivity.this, "页面加载已完成，", Toast.LENGTH_SHORT).show();
+                view.loadUrl("javascript:document.getElementById('username').value = " + Sp_read_id());
+                view.loadUrl("javascript:(function(){document.getElementById('password').value = '" + Sp_read_psd() + "';})() ");
                 view.loadUrl("javascript:document.getElementById('login').click()");
                 view.loadUrl("javascript:document.getElementById('login-account').click()");
 

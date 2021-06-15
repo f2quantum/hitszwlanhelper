@@ -13,7 +13,6 @@
         app:showAsAction="always" />
 
 
-
     <item
         android:id="@+id/setting"
         android:title="设置"

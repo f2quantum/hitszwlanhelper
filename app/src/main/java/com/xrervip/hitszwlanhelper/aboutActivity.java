@@ -1,16 +1,8 @@
 package com.xrervip.hitszwlanhelper;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class aboutActivity extends AppCompatActivity {
 

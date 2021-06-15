@@ -85,7 +85,7 @@ public class NewSettingActivity extends AppCompatActivity {
                         final String[] net = new String[1];
                         AlertDialog alertDialog1 = new AlertDialog.Builder(NewSettingActivity.this)
                                 .setTitle("请选择网络")//默认为0表示选中第一个项目
-                                .setSingleChoiceItems(item, SharedPreferenceReader("NetWork").equals("UTSZ")?1:0, new DialogInterface.OnClickListener() {
+                                .setSingleChoiceItems(item, SharedPreferenceReader("NetWork").equals("UTSZ") ? 1 : 0, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         net[0] = item[which];
@@ -94,7 +94,7 @@ public class NewSettingActivity extends AppCompatActivity {
                                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        String result= net[0]!=null?net[0]:SharedPreferenceReader("NetWork");
+                                        String result = net[0] != null ? net[0] : SharedPreferenceReader("NetWork");
                                         SharedPreferenceWritter("NetWork", result);
                                         Toast.makeText(NewSettingActivity.this, "默认网络已设置为" + result, Toast.LENGTH_LONG).show();
                                         recreate();

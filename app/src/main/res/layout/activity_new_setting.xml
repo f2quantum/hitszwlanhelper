@@ -3,6 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -12,17 +20,10 @@
 
         <TextView
             android:id="@+id/toolbar_title_setting"
-            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
             android:text="设置"
-            /></androidx.appcompat.widget.Toolbar>
-
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-
-        />
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

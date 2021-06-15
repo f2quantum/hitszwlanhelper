@@ -28,12 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
+
         <TextView
             android:id="@+id/toolbar_title_main"
-            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
             android:text="NetWork"
-            /></androidx.appcompat.widget.Toolbar>/>
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.Toolbar>
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

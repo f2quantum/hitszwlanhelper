@@ -2,18 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xrervip.hitszwlanhelper">
     <!--使用网络-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--wifi状态权限-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--位置信息-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--如果是安卓10.0，需要后台获取连接的wifi名称则添加进程获取位置信息权限 -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <!--android 10.0使用wifi api新添加的权限-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/catsmile"
@@ -21,8 +9,7 @@
         android:roundIcon="@mipmap/catsmile"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
+        android:usesCleartextTraffic="true">
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -38,5 +25,17 @@
 
 
     </application>
+    <!--网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--wifi状态权限-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--位置信息-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--如果是安卓10.0，需要后台获取连接的wifi名称则添加进程获取位置信息权限 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!--android 10.0使用wifi api新添加的权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

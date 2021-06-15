@@ -1,8 +1,5 @@
 package com.xrervip.hitszwlanhelper;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +11,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 public class settingActivity extends AppCompatActivity {
 
 
@@ -24,19 +24,20 @@ public class settingActivity extends AppCompatActivity {
     private Switch netSwitch;
     private Button save_btn;
     private Button requestPermission_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
 
-        id=findViewById(R.id.id);
+        id = findViewById(R.id.id);
         password = findViewById(R.id.password);
-        netSwitch =findViewById(R.id.switch_wlan);
+        netSwitch = findViewById(R.id.switch_wlan);
         curUsr = findViewById(R.id.currentUserText);
         save_btn = findViewById(R.id.button_save);
-        requestPermission_btn=findViewById(R.id.button_requestPermission);
-        mSp=super.getSharedPreferences("HITszWlanHelper",MODE_PRIVATE);
+        requestPermission_btn = findViewById(R.id.button_requestPermission);
+        mSp = super.getSharedPreferences("HITszWlanHelper", MODE_PRIVATE);
 
         reFreshCurUsr();
         netSwitch.setChecked(SharedPreferenceReader("NetWork").equals("UTSZ"));
@@ -53,11 +54,11 @@ public class settingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 //控制开关字体颜色
                 if (isChecked) {
-                    SharedPreferenceWritter("NetWork","UTSZ");
+                    SharedPreferenceWritter("NetWork", "UTSZ");
                     Toast.makeText(settingActivity.this, "默认网络已设置为UTSZ", Toast.LENGTH_LONG).show();
 
-                }else {
-                    SharedPreferenceWritter("NetWork","HITSZ");
+                } else {
+                    SharedPreferenceWritter("NetWork", "HITSZ");
                     Toast.makeText(settingActivity.this, "默认网络已设置为HITSZ", Toast.LENGTH_LONG).show();
                 }
 
@@ -66,15 +67,20 @@ public class settingActivity extends AppCompatActivity {
         });
     }
 
-    private String SharedPreferenceReader(String key){
-        return mSp.getString(key,"HITSZ");
+    private String SharedPreferenceReader(String key) {
+        return mSp.getString(key, "HITSZ");
     }
 
-    private void SharedPreferenceWritter(String key,String value){
+    private void SharedPreferenceWritter(String key, String value) {
         SharedPreferences.Editor editor = mSp.edit();
         editor.putString(key, value);
         editor.commit();
     }
+
+    private void reFreshCurUsr() {
+        curUsr.setText("当前储存账户：" + mSp.getString("str_id", "还没有设置账户"));
+    }
+
     private class SaveBtnListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -90,10 +96,6 @@ public class settingActivity extends AppCompatActivity {
             finish();
 
         }
-    }
-
-    private void reFreshCurUsr(){
-        curUsr.setText("当前储存账户："+ mSp.getString("str_id","还没有设置账户"));
     }
 
 
